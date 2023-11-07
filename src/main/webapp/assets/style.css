@@ -32,6 +32,7 @@ body{
     font-weight: 400;
     font-size: 16px;
     color: #5c5c5e;
+    margin: 0;
 }
 
 .header{
@@ -51,10 +52,97 @@ body{
     background-image: url(../images/img.png);
     background-repeat: no-repeat;
     background-size: cover;
-    /*background-position: bottom center;*/
+    background-position: bottom center;
 }
 
 .title{
-    margin: 0;
+    margin-top: 0;
     padding-top: 15%;
+    font-size: 46px;
+    margin-bottom: 10px;
+}
+
+.subtitle{
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.top-text{
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-left: 1px;
+}
+
+.main-btn{
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(180deg, darkmagenta 0%, rgba(80, 0, 250, 0.93) 100%);
+    display: flex;
+    text-transform: uppercase;
+    padding: 1px;
+}
+
+.link-text{
+    font-size: 16px;
+    color: #d9dbe3;
+    padding: 20px 110px;
+}
+
+/*.clock{*/
+/*    color: #5c5c5e;*/
+/*    background-color: rgb(236,236,236);*/
+/*    padding: 20px 105px;*/
+/*}*/
+
+body .ui-clock{
+    font-size: 16px;
+    color: #5c5c5e;
+    background-color: rgb(236,236,236);
+    padding: 20px 55px;
+}
+
+body .ui-widget{
+    border: none;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.footer{
+    position: relative;
+    margin-top: -60px; /* отрицательное значение высоты футера */
+    height: 60px;
+    clear:both;
+    padding: 0;
+}
+
+.footer-text{
+    margin: 0;
+    font-size: 13px;
+}
+
+.container-footer{
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding-top: 10px;
+}
+
+.social{
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    gap: 15px;
+    padding-left: 20px;
+}
+
+.social-item{
+    height: 26px;
+    width: 26px;
+}
+
+.footer-img{
+    height: 26px;
+    width: 26px;
 }
