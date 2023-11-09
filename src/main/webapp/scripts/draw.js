@@ -1,17 +1,77 @@
+const inputTextR = document.getElementById("formSelect:r")
+
 const divCanvas = document.getElementById('div-canvas');
 divCanvas.innerHTML = "<canvas id=\"canvas\" height=\"325\" width=\"325\"></canvas>"
 
 const canvas = document.getElementById("canvas")
 
 let ctx = canvas.getContext('2d');
-const radiusInPixel = 50;
+const radiusInPixel = 25;
 const centerX = 151.5
 const centerY = 151.5
 const widthAxisY = 3
 const heightAxisX = 3
 
-draw()
-function draw(){
+// inputTextR.addEventListener("input", function (){
+//     console.log(inputTextR.value)
+//     draw(centerX, centerY, radiusInPixel * inputTextR.value, widthAxisY, heightAxisX)
+// })
+
+function validPixelXY(X, Y){
+    return (!isNaN(X) && !isNaN(Y))
+}
+
+function convertPixelToCoordY(coord, radiusInPixel){
+    return (centerY - coord) / radiusInPixel
+}
+
+function convertPixelToCoordX(coord, radiusInPixel){
+    return (coord - centerX) / radiusInPixel
+}
+
+function validR(R){
+    return (R !== "" && parseFloat(R) >= 1 && parseFloat(R) <= 4)
+}
+
+canvas.addEventListener('mousedown', function (event){
+    const inputTextR = document.getElementById("formSelect:r")
+    const errMsg = document.getElementById("errMsg")
+    if (validR(inputTextR.value)) {
+        errMsg.innerHTML = ""
+        if (validPixelXY(event.offsetX, event.offsetY)) {
+            const beanValueX = document.getElementById("graphSelect:graph-x")
+            const beanValueY = document.getElementById("graphSelect:graph-y")
+            const beanValueR = document.getElementById("graphSelect:graph-r")
+
+            beanValueX.value = convertPixelToCoordX(event.offsetX, radiusInPixel)
+            beanValueY.value = convertPixelToCoordY(event.offsetY, radiusInPixel)
+            beanValueR.value = inputTextR.value
+            console.log(convertPixelToCoordY(event.offsetY, radiusInPixel))
+
+            updateBeanValues();
+        }
+    }else {
+        errMsg.style.color = "red"
+        errMsg.textContent = "Ошибка в радиусе(доступный диапозон [1;4]"
+    }
+
+})
+
+function r(){
+    const inputTextR = document.getElementById("formSelect:r")
+    const errMsg = document.getElementById("errMsg")
+    if (validR(inputTextR.value)) {
+        draw(centerX, centerY, radiusInPixel * inputTextR.value, widthAxisY, heightAxisX)
+        errMsg.innerHTML = ""
+        return
+    }
+    errMsg.style.color = "red"
+    errMsg.textContent = "Ошибка в радиусе(доступный диапозон [1;4]"
+
+}
+
+draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX)
+function draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX){
 
     ctx.clearRect(0, 0, 325, 325);
     ctx.fillStyle = 'black'
@@ -19,7 +79,7 @@ function draw(){
     //четверть круга
     ctx.beginPath()
     ctx.moveTo(centerX, centerY)
-    ctx.arc(centerX, centerY, radiusInPixel, 1.55, 3.11, false)
+    ctx.arc(centerX, centerY, radiusInPixel, Math.PI/2, Math.PI, false)
     ctx.fillStyle = 'blue'
     ctx.fill()
 
