@@ -40,10 +40,19 @@ body{
 }
 
 .nav{
-    display: flex; /* выставляем в ряд */
-    justify-content: space-between; /* раскидываем по углам */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center; /* выравниваем по горизонтали относительно друг друга */
     height: 80px; /* помогаем align items */
+}
+
+.home{
+    position: relative;
+    justify-self: end;
+}
+
+.logo{
+    justify-self: center;
 }
 
 .main-container{
@@ -60,6 +69,7 @@ body{
     padding-top: 15%;
     font-size: 46px;
     margin-bottom: 10px;
+    font-weight: 400;
 }
 
 .subtitle{
@@ -145,4 +155,15 @@ body .ui-widget{
 .footer-img{
     height: 26px;
     width: 26px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 20px;
+    padding-bottom: 60px;
+}
+
+.table{
+    justify-self: end;
 }
