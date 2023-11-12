@@ -167,3 +167,8 @@ body .ui-widget{
 .table{
     justify-self: end;
 }
+
+#result-table{
+    background-color: whitesmoke;
+    color: black;
+}

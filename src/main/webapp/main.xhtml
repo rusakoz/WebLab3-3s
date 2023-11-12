@@ -3,9 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html"/>
     <link rel="StyleSheet" href="assets/style.css" type="text/css"/>
@@ -31,7 +31,7 @@
                     <div class="canvas-and-form">
                         <div class="canvas" id="div-canvas"></div>
                         <div class="form">
-                            <h1 class="errMsg" id="errMsg"></h1>
+                            <h3 class="errMsg" id="errMsg"></h3>
                             <h:form id="formSelect">
                                 <h:inputText id="x" value="#{formDataXBean.x}"
                                              validator="#{formDataXBean.validateSelectX}">
@@ -51,13 +51,13 @@
                                 <h:message for="y" />
                                 <br/>
                                 <h:inputText id="r" value="#{formDataRBean.r}"
-                                             validator="#{formDataRBean.validateSelectR}" onchange="r()">
+                                             validator="#{formDataRBean.validateSelectR}" onchange="refreshGraph()">
                                     <f:validateDoubleRange minimum="1" maximum="4" />
                                 </h:inputText>
                                 <h:message for="r" />
                                 <br/>
                                 <h:commandButton value="click" id="sendButton">
-                                    <f:ajax execute="@form" listener="#{areaCheckBean.areaCheck}" render="@form result-table"/>
+                                    <f:ajax onevent="printPointFromTable" execute="@form" listener="#{areaCheckBean.areaCheck}" render="@form result-table"/>
                                 </h:commandButton>
                             </h:form>
                         </div>
@@ -78,11 +78,11 @@
                             </h:column>
                             <h:column>
                                 <f:facet name = "header">Result</f:facet>
-                                #{result.hit ? "Hit" : "Fail"}
+                                #{result.hit ? "Попал" : "Не попал"}
                             </h:column>
                             <h:column>
-                                <f:facet name = "header">Executed at</f:facet>
-                                <h:outputText value="#{result.date}" />
+                                <f:facet name = "header">Date</f:facet>
+                                <h:outputText value="#{of:formatDate(result.date, 'dd MMM yyyy HH:mm:ss')}" />
                             </h:column>
                             <h:column>
                                 <f:facet name = "header">Execution time</f:facet>

@@ -1,5 +1,4 @@
-const inputTextR = document.getElementById("formSelect:r")
-
+const form = document.getElementById("formSelect")
 const divCanvas = document.getElementById('div-canvas');
 divCanvas.innerHTML = "<canvas id=\"canvas\" height=\"325\" width=\"325\"></canvas>"
 
@@ -46,7 +45,9 @@ canvas.addEventListener('mousedown', function (event){
             beanValueX.value = convertPixelToCoordX(event.offsetX, radiusInPixel)
             beanValueY.value = convertPixelToCoordY(event.offsetY, radiusInPixel)
             beanValueR.value = inputTextR.value
-            console.log(convertPixelToCoordY(event.offsetY, radiusInPixel))
+            printPoint(convertPixelToCoordX(event.offsetX, radiusInPixel),
+                        convertPixelToCoordY(event.offsetY, radiusInPixel),
+                        inputTextR.value)
 
             updateBeanValues();
         }
@@ -57,7 +58,17 @@ canvas.addEventListener('mousedown', function (event){
 
 })
 
-function r(){
+function printPointFromTable(){
+    const all_tr = document.querySelectorAll("#result-table tbody > tr")
+    const last_tr = all_tr[all_tr.length - 1]
+    console.log(last_tr.cells[0])
+    console.log(2)
+    printPoint(parseFloat(last_tr.cells[0].textContent),
+                parseFloat(last_tr.cells[1].textContent),
+                    parseFloat(last_tr.cells[2].textContent))
+}
+
+function refreshGraph(){
     const inputTextR = document.getElementById("formSelect:r")
     const errMsg = document.getElementById("errMsg")
     if (validR(inputTextR.value)) {
@@ -147,8 +158,8 @@ function draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX){
     ctx.fillRect(centerX + radiusInPixel, centerY - 4.5, 2, 8)
 }
 
-function printPoint(R, X, Y){
-    draw()
+function printPoint(X, Y, R){
+    draw(centerX, centerY, radiusInPixel * R, widthAxisY, heightAxisX)
     let x = centerX - 2 + (50 / R) * X
     let y = centerY - 2 + (-50 / R) * Y
     ctx.fillStyle = 'red'
