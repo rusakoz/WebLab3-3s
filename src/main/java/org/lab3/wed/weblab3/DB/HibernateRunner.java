@@ -24,5 +24,6 @@ public class HibernateRunner {
                         .execTime(432423423)
                         .build()
         );
+        System.out.println("wtf");
     }
 }

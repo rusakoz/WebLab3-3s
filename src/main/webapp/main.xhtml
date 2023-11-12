@@ -17,8 +17,8 @@
         <div class="container">
             <div class="nav">
                 <p class="info">Группа: P3223 Вариант: ...</p>
-                <a href="index.xhtml" class="logo">Кожемякин Руслан Алексеевич</a>
-                <a href="index.xhtml" class="home">
+                <a href="" class="logo" id="logo-a">Кожемякин Руслан Алексеевич</a>
+                <a href="" class="home" id="home-a">
                     <img src="images/home.svg" alt="#" height="16" width="16"/>
                 </a>
             </div>
@@ -119,8 +119,25 @@
         </div>
     </div>
 
-
 </h:body>
+
+<h:form id="formm">
+    <p:button style="display: none" id="btnn" outcome="goToIndex"/>
+</h:form>
+
+<h:outputScript>
+
+    document.getElementById("home-a").addEventListener("click", function (ev){
+        ev.preventDefault()
+        document.getElementById("formm:btnn").click()
+    });
+
+    document.getElementById("logo-a").addEventListener("click", function (ev){
+        ev.preventDefault()
+        document.getElementById("formm:btnn").click()
+    });
+
+</h:outputScript>
 
 <h:form id="graphSelect">
     <h:inputHidden id="graph-x" value="#{formDataXBean.x}" />

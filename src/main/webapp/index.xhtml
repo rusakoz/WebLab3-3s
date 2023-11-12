@@ -9,7 +9,7 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html" />
     <link rel="StyleSheet" href="assets/style.css" type="text/css" />
-    <title>Ееесс</title>
+    <title>Третья лаба</title>
 </h:head>
 
 <h:body>
@@ -17,8 +17,8 @@
         <div class="container">
             <div class="nav">
                 <p class="info">Группа: P3223 Вариант: ...</p>
-                <a href="index.xhtml" class="logo">Кожемякин Руслан Алексеевич</a>
-                <a href="index.xhtml" class="home">
+                <a href="" class="logo" id="logo-a">Кожемякин Руслан Алексеевич</a>
+                <a href="" class="home" id="home-a">
                     <img src="images/home.svg" alt="#" height="16" width="16"/>
                 </a>
             </div>
@@ -30,12 +30,14 @@
                 <h1 class="title">Hello my dear friend</h1>
                 <p class="subtitle">This is demo site</p>
                 <p class="top-text">Press F for change location</p>
-                <button class="main-btn" id="main-btn" type="button" >
+
+                <button class="main-btn" id="main-btn" type="button">
                     <span class="link-text">Fffffff</span>
                     <h:form>
                         <p:clock pattern="dd.MM.yyyy HH:mm:ss" mode="server" autoSync="true" syncInterval="8000" />
                     </h:form>
                 </button>
+
             </div>
         </div>
     </div>
@@ -64,13 +66,26 @@
         </div>
     </div>
 
-
-    <h:outputScript>
-
-        document.getElementById("main-btn").addEventListener("click", function (){
-            window.location.replace("main.xhtml")
-        });
-
-    </h:outputScript>
 </h:body>
+
+<h:form id="formm">
+    <p:button style="display: none" id="btnn" outcome="goToMain"/>
+    <p:button style="display: none" id="btnn2" outcome="goToIndex"/>
+</h:form>
+
+<h:outputScript>
+
+    document.getElementById("home-a").addEventListener("click", function (){
+        document.getElementById("formm:btnn2").click()
+    });
+
+    document.getElementById("logo-a").addEventListener("click", function (){
+        document.getElementById("formm:btnn2").click()
+    });
+
+    document.getElementById("main-btn").addEventListener("click", function (){
+        document.getElementById("formm:btnn").click()
+    });
+
+</h:outputScript>
 </html>
