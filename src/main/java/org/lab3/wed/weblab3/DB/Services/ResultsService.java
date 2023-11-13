@@ -19,9 +19,6 @@ public class ResultsService {
         }
         return INSTANCE;
     }
-    public Results findResultById(int id) {
-        return checkAreaDAOimpl.findById(id);
-    }
     public List<Results> findAllResults() {
         return checkAreaDAOimpl.findAll();
     }

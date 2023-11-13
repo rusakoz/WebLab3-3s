@@ -5,8 +5,11 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core">
+
 <h:head>
+    <icecore:config render="false" />
     <meta http-equiv="Content-Type" content="text/html" />
     <link rel="StyleSheet" href="assets/style.css" type="text/css" />
     <title>Третья лаба</title>
@@ -16,7 +19,7 @@
     <div class="header">
         <div class="container">
             <div class="nav">
-                <p class="info">Группа: P3223 Вариант: ...</p>
+                <p class="info">Группа: P3223 Вариант: 285306</p>
                 <a href="" class="logo" id="logo-a">Кожемякин Руслан Алексеевич</a>
                 <a href="" class="home" id="home-a">
                     <img src="images/home.svg" alt="#" height="16" width="16"/>
@@ -33,8 +36,8 @@
 
                 <button class="main-btn" id="main-btn" type="button">
                     <span class="link-text">Fffffff</span>
-                    <h:form>
-                        <p:clock pattern="dd.MM.yyyy HH:mm:ss" mode="server" autoSync="true" syncInterval="8000" />
+                    <h:form id="form-clock" >
+                        <p:clock id="clock" pattern="dd.MM.yyyy HH:mm:ss" mode="server" autoSync="true" syncInterval="11000" />
                     </h:form>
                 </button>
 

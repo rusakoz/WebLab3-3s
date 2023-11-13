@@ -16,7 +16,7 @@ public class HibernateRunner {
         ResultsService resultsService = ResultsService.getInstance();
         resultsService.saveResult(
                 Results.builder()
-                        .x(1.17733)
+                        .x(1.143242344)
                         .y(2.277)
                         .r(377)
                         .hit(true)
@@ -24,6 +24,9 @@ public class HibernateRunner {
                         .execTime(432423423)
                         .build()
         );
+
+        resultsService.findAllResults();
+
         System.out.println("wtf");
     }
 }

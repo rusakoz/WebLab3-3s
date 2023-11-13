@@ -5,8 +5,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:of="http://omnifaces.org/functions">
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core">
 <h:head>
+    <icecore:config render="false" />
     <meta http-equiv="Content-Type" content="text/html"/>
     <link rel="StyleSheet" href="assets/style.css" type="text/css"/>
     <title>Третья лаба</title>
@@ -16,7 +18,7 @@
     <div class="header">
         <div class="container">
             <div class="nav">
-                <p class="info">Группа: P3223 Вариант: ...</p>
+                <p class="info">Группа: P3223 Вариант: 285306</p>
                 <a href="" class="logo" id="logo-a">Кожемякин Руслан Алексеевич</a>
                 <a href="" class="home" id="home-a">
                     <img src="images/home.svg" alt="#" height="16" width="16"/>
@@ -39,21 +41,15 @@
                                 </h:inputText>
                                 <h:message for="x" />
                                 <br/>
-                                <h:selectOneMenu id="y" value="#{formDataYBean.y}"
-                                                 validator="#{formDataYBean.validateSelectY}">
-                                    <f:selectItem itemLabel="---Please, choose an option---"/>
-                                    <f:selectItem itemValue="1" itemLabel="1"/>
-                                    <f:selectItem itemValue="1.5" itemLabel="1.5"/>
-                                    <f:selectItem itemValue="2" itemLabel="2"/>
-                                    <f:selectItem itemValue="2.5" itemLabel="2.5"/>
-                                    <f:selectItem itemValue="3" itemLabel="3"/>
-                                </h:selectOneMenu>
+                                <h:inputText id="y" value="#{formDataYBean.y}"
+                                             validator="#{formDataYBean.validateSelectY}">
+                                    <f:validateDoubleRange minimum="-3" maximum="5" />
+                                </h:inputText>
                                 <h:message for="y" />
                                 <br/>
-                                <h:inputText id="r" value="#{formDataRBean.r}"
-                                             validator="#{formDataRBean.validateSelectR}" onchange="refreshGraph()">
-                                    <f:validateDoubleRange minimum="1" maximum="4" />
-                                </h:inputText>
+                                <p:outputLabel for="@next" value="Basic Spinner"/>
+                                <p:spinner id="r" value="#{formDataRBean.r}" stepFactor="0.1" min="0.1" max="3"
+                                           validator="#{formDataRBean.validateSelectR}" onchange="refreshGraph()"/>
                                 <h:message for="r" />
                                 <br/>
                                 <h:commandButton value="click" id="sendButton">

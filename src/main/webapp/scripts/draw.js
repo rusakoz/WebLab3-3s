@@ -29,13 +29,13 @@ function convertPixelToCoordX(coord, radiusInPixel){
 }
 
 function validR(R){
-    return (R !== "" && parseFloat(R) >= 1 && parseFloat(R) <= 4)
+    return (R !== "" && parseFloat(R) >= 0.1 && parseFloat(R) <= 3)
 }
 
 canvas.addEventListener('mousedown', function (event){
-    const inputTextR = document.getElementById("formSelect:r")
+    const inputTextR = document.getElementById("formSelect:r_input")
     const errMsg = document.getElementById("errMsg")
-    if (validR(inputTextR.value)) {
+    if (validR(inputTextR.ariaValueNow)) {
         errMsg.innerHTML = ""
         if (validPixelXY(event.offsetX, event.offsetY)) {
             const beanValueX = document.getElementById("graphSelect:graph-x")
@@ -44,16 +44,16 @@ canvas.addEventListener('mousedown', function (event){
 
             beanValueX.value = convertPixelToCoordX(event.offsetX, radiusInPixel)
             beanValueY.value = convertPixelToCoordY(event.offsetY, radiusInPixel)
-            beanValueR.value = inputTextR.value
+            beanValueR.value = parseFloat(inputTextR.ariaValueNow)
             printPoint(convertPixelToCoordX(event.offsetX, radiusInPixel),
                         convertPixelToCoordY(event.offsetY, radiusInPixel),
-                        inputTextR.value)
+                        parseFloat(inputTextR.ariaValueNow))
 
             updateBeanValues();
         }
     }else {
         errMsg.style.color = "red"
-        errMsg.textContent = "Ошибка в радиусе(доступный диапозон [1;4]"
+        errMsg.textContent = "Ошибка в радиусе(доступный диапозон [0.1;3]"
     }
 
 })
@@ -69,15 +69,15 @@ function printPointFromTable(){
 }
 
 function refreshGraph(){
-    const inputTextR = document.getElementById("formSelect:r")
+    const inputTextR = document.getElementById("formSelect:r_input")
     const errMsg = document.getElementById("errMsg")
-    if (validR(inputTextR.value)) {
-        draw(centerX, centerY, radiusInPixel * inputTextR.value, widthAxisY, heightAxisX)
+    if (validR(inputTextR.ariaValueNow)) {
+        draw(centerX, centerY, radiusInPixel * inputTextR.ariaValueNow, widthAxisY, heightAxisX)
         errMsg.innerHTML = ""
         return
     }
     errMsg.style.color = "red"
-    errMsg.textContent = "Ошибка в радиусе(доступный диапозон [1;4]"
+    errMsg.textContent = "Ошибка в радиусе(доступный диапозон [0.1;3]"
 
 }
 
@@ -160,8 +160,8 @@ function draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX){
 
 function printPoint(X, Y, R){
     draw(centerX, centerY, radiusInPixel * R, widthAxisY, heightAxisX)
-    let x = centerX - 2 + (50 / R) * X
-    let y = centerY - 2 + (-50 / R) * Y
+    let x = centerX - 2 + radiusInPixel * X
+    let y = centerY - 2 + (-radiusInPixel * Y)
     ctx.fillStyle = 'red'
     ctx.fillRect(x, y, 4, 4)
 }
