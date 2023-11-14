@@ -19,20 +19,24 @@ public class ResultsService {
         }
         return INSTANCE;
     }
-    public List<Results> findAllResults() {
+    public List<Results> findAllResults() throws Exception {
         return checkAreaDAOimpl.findAll();
     }
 
-    public void saveResult(Results results) {
+    public void saveResult(Results results) throws Exception {
         checkAreaDAOimpl.save(results);
     }
 
-    public void deleteResult(Results results) {
+    public void deleteResult(Results results) throws Exception {
         checkAreaDAOimpl.delete(results);
     }
 
-    public void updateResult(Results results) {
+    public void updateResult(Results results) throws Exception {
         checkAreaDAOimpl.update(results);
+    }
+
+    public void clearTable() throws Exception{
+        checkAreaDAOimpl.clearTable();
     }
 
 }

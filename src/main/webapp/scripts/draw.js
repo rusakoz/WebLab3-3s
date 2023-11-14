@@ -10,6 +10,7 @@ const centerX = 151.5
 const centerY = 151.5
 const widthAxisY = 3
 const heightAxisX = 3
+let radius = 0.1;
 
 // inputTextR.addEventListener("input", function (){
 //     console.log(inputTextR.value)
@@ -41,15 +42,13 @@ canvas.addEventListener('mousedown', function (event){
             const beanValueX = document.getElementById("graphSelect:graph-x")
             const beanValueY = document.getElementById("graphSelect:graph-y")
             const beanValueR = document.getElementById("graphSelect:graph-r")
+            const btn = document.getElementById("graphSelect:sendBtnCanvas")
 
             beanValueX.value = convertPixelToCoordX(event.offsetX, radiusInPixel)
             beanValueY.value = convertPixelToCoordY(event.offsetY, radiusInPixel)
-            beanValueR.value = parseFloat(inputTextR.ariaValueNow)
-            printPoint(convertPixelToCoordX(event.offsetX, radiusInPixel),
-                        convertPixelToCoordY(event.offsetY, radiusInPixel),
-                        parseFloat(inputTextR.ariaValueNow))
+            beanValueR.value = inputTextR.ariaValueNow
 
-            updateBeanValues();
+            btn.click()
         }
     }else {
         errMsg.style.color = "red"
@@ -61,8 +60,6 @@ canvas.addEventListener('mousedown', function (event){
 function printPointFromTable(){
     const all_tr = document.querySelectorAll("#result-table tbody > tr")
     const last_tr = all_tr[all_tr.length - 1]
-    console.log(last_tr.cells[0])
-    console.log(2)
     printPoint(parseFloat(last_tr.cells[0].textContent),
                 parseFloat(last_tr.cells[1].textContent),
                     parseFloat(last_tr.cells[2].textContent))
@@ -72,6 +69,7 @@ function refreshGraph(){
     const inputTextR = document.getElementById("formSelect:r_input")
     const errMsg = document.getElementById("errMsg")
     if (validR(inputTextR.ariaValueNow)) {
+        radius = parseFloat(inputTextR.ariaValueNow)
         draw(centerX, centerY, radiusInPixel * inputTextR.ariaValueNow, widthAxisY, heightAxisX)
         errMsg.innerHTML = ""
         return
@@ -90,17 +88,17 @@ function draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX){
     //четверть круга
     ctx.beginPath()
     ctx.moveTo(centerX, centerY)
-    ctx.arc(centerX, centerY, radiusInPixel, Math.PI/2, Math.PI, false)
+    ctx.arc(centerX, centerY, radiusInPixel, 0, Math.PI/2, false)
     ctx.fillStyle = 'blue'
     ctx.fill()
 
     //квадрат
     ctx.beginPath()
-    ctx.fillRect(centerX, centerY - radiusInPixel, radiusInPixel, radiusInPixel)
+    ctx.fillRect(centerX - radiusInPixel/2, centerY, radiusInPixel/2, radiusInPixel)
 
     //треугольник
     ctx.moveTo(centerX, centerY - radiusInPixel)
-    ctx.lineTo(centerX - radiusInPixel/2, centerY)
+    ctx.lineTo(centerX - radiusInPixel, centerY)
     ctx.lineTo(centerX, centerY)
     ctx.fill()
 
@@ -156,6 +154,10 @@ function draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX){
     ctx.fillRect(centerX - radiusInPixel/2, centerY - 4.5, 2, 8)
     ctx.fillRect(centerX + radiusInPixel/2, centerY - 4.5, 2, 8)
     ctx.fillRect(centerX + radiusInPixel, centerY - 4.5, 2, 8)
+
+    ctx.font = "15px serif";
+    ctx.fillText(radius.toString(), centerX + 4.5, centerY - radiusInPixel);
+    ctx.fillText(radius.toString(), centerX + radiusInPixel, centerY - 4.5);
 }
 
 function printPoint(X, Y, R){

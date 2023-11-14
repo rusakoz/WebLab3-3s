@@ -164,11 +164,38 @@ body .ui-widget{
     padding-bottom: 60px;
 }
 
-.table{
-    justify-self: end;
-}
-
 #result-table{
     background-color: whitesmoke;
     color: black;
+    max-height: 400px;
+    justify-self: end;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.enter{
+    margin-bottom: 10px;
+}
+
+#formSelect\:x{
+    margin-top: 10px;
+}
+
+#formSelect\:sendButton{
+    color: #cacad6;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(180deg, darkmagenta 0%, rgba(80, 0, 250, 0.93) 100%);
+    display: flex;
+    text-transform: uppercase;
+    padding: 10px 50px;
+}
+
+#clearButton{
+    width: 100%;
+    background: linear-gradient(180deg, darkmagenta 0%, rgba(80, 0, 250, 0.93) 100%);
+    cursor: pointer;
+    color: #cacad6;
 }

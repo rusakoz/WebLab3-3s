@@ -14,20 +14,15 @@ import java.util.List;
 @Named
 @Data
 public class AreaCheckBean implements Serializable {
-
     @Inject
-    FormDataXBean xBean;
-    @Inject
-    FormDataYBean yBean;
-    @Inject
-    FormDataRBean rBean;
+    FormDataBean dataBean;
     @Inject
     OutResultsBean resBean;
 
     public void areaCheck(){
-        final double X = Double.parseDouble(xBean.getX());
-        final double Y = Double.parseDouble(yBean.getY());
-        final double R = Double.parseDouble(rBean.getR());
+        final double X = dataBean.getX();
+        final double Y = Double.parseDouble(dataBean.getY());
+        final double R = Double.parseDouble(dataBean.getR());
         final long startCheck = System.nanoTime();
         final boolean hit = CheckHit.checkHit(X, Y, R);
         final long endCheck = System.nanoTime();
@@ -40,7 +35,11 @@ public class AreaCheckBean implements Serializable {
                 .date(LocalDateTime.now())
                 .execTime(endCheck - startCheck)
                 .build();
-        ResultsService.getInstance().saveResult(resultsEntity);
+        try {
+            ResultsService.getInstance().saveResult(resultsEntity);
+        } catch (Exception e) {
+            System.err.println("Ошибка сохранения данных");
+        }
 
         List<Results> resultsList = resBean.getResults();
         resultsList.add(resultsEntity);

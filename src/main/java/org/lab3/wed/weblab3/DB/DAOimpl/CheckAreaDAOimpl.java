@@ -27,7 +27,7 @@ public class CheckAreaDAOimpl implements CheckAreaDAO {
     }
 
     @Override
-    public void save(Results results) {
+    public void save(Results results) throws Exception {
         EntityManagerFactory entityManagerFactory = HibernateSessionFactoryUtil.getSessionFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try{
@@ -37,12 +37,12 @@ public class CheckAreaDAOimpl implements CheckAreaDAO {
             entityManager.close();
         }catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw e;
+            throw new Exception(e);
         }
     }
 
     @Override
-    public void delete(Results results) {
+    public void delete(Results results) throws Exception {
         EntityManagerFactory entityManagerFactory = HibernateSessionFactoryUtil.getSessionFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try{
@@ -52,12 +52,12 @@ public class CheckAreaDAOimpl implements CheckAreaDAO {
             entityManager.close();
         }catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw e;
+            throw new Exception(e);
         }
     }
 
     @Override
-    public void update(Results results) {
+    public void update(Results results) throws Exception {
         EntityManagerFactory entityManagerFactory = HibernateSessionFactoryUtil.getSessionFactory();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try{
@@ -67,22 +67,37 @@ public class CheckAreaDAOimpl implements CheckAreaDAO {
             entityManager.close();
         }catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw e;
+            throw new Exception(e);
         }
     }
 
     @Override
-    public List<Results> findAll() {
+    public List<Results> findAll() throws Exception{
         List<Results> list = null;
         try{
             EntityManagerFactory entityManagerFactory = HibernateSessionFactoryUtil.getSessionFactory();
             EntityManager entityManager = entityManagerFactory.createEntityManager();
-            list = entityManager.createQuery("FROM Results r").getResultList();
+            list = entityManager.createQuery("from Results r").getResultList();
             entityManager.close();
         }catch (Exception e) {
-            System.err.println(e);
+            throw new Exception(e);
         }
         return list;
+    }
+
+    @Override
+    public void clearTable() throws Exception {
+        EntityManagerFactory entityManagerFactory = HibernateSessionFactoryUtil.getSessionFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.createQuery("delete from Results r").executeUpdate();
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        }catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new Exception(e);
+        }
     }
 
 //    @Override

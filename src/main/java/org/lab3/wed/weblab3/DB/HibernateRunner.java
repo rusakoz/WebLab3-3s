@@ -12,21 +12,22 @@ import java.time.LocalDateTime;
 
 public class HibernateRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ResultsService resultsService = ResultsService.getInstance();
-        resultsService.saveResult(
-                Results.builder()
-                        .x(1.143242344)
-                        .y(2.277)
-                        .r(377)
-                        .hit(true)
-                        .date(LocalDateTime.now())
-                        .execTime(432423423)
-                        .build()
-        );
+//        resultsService.saveResult(
+//                Results.builder()
+//                        .x(1.143242344)
+//                        .y(2.277)
+//                        .r(377)
+//                        .hit(true)
+//                        .date(LocalDateTime.now())
+//                        .execTime(432423423)
+//                        .build()
+//        );
+//
+//        resultsService.findAllResults();
+        resultsService.clearTable();
 
-        resultsService.findAllResults();
-
-        System.out.println("wtf");
+        System.err.println("wаывдадываыв  3122 sdasd");
     }
 }

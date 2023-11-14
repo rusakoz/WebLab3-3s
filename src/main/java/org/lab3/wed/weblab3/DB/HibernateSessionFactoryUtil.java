@@ -31,6 +31,7 @@ public class HibernateSessionFactoryUtil {
         return entityManagerFactory;
     }
 
+    // Hibernate
 //    public static SessionFactory getSessionFactory() {
 //        if (sessionFactory == null) {
 //            final Dotenv dotenv = Dotenv.load();
