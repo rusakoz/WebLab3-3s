@@ -12,11 +12,6 @@ const widthAxisY = 3
 const heightAxisX = 3
 let radius = 0.1;
 
-// inputTextR.addEventListener("input", function (){
-//     console.log(inputTextR.value)
-//     draw(centerX, centerY, radiusInPixel * inputTextR.value, widthAxisY, heightAxisX)
-// })
-
 function validPixelXY(X, Y){
     return (!isNaN(X) && !isNaN(Y))
 }

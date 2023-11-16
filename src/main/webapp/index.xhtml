@@ -16,31 +16,21 @@
 </h:head>
 
 <h:body>
-    <div class="header">
-        <div class="container">
-            <div class="nav">
-                <p class="info">Группа: P3223 Вариант: 285306</p>
-                <a href="" class="logo" id="logo-a">Кожемякин Руслан Алексеевич</a>
-                <a href="" class="home" id="home-a">
-                    <img src="images/home.svg" alt="#" height="16" width="16"/>
-                </a>
-            </div>
-        </div>
-    </div>
+    <ui:include src="headerFooter/header.xhtml"/>
     <div class="main">
         <div class="main-container">
             <div class="container">
                 <h1 class="title">Hello my dear friend</h1>
                 <p class="subtitle">This is demo site</p>
                 <p class="top-text">Press F for change location</p>
-
-                <button class="main-btn" id="main-btn" type="button">
-                    <span class="link-text">Fffffff</span>
-                    <h:form id="form-clock" >
-                        <p:clock id="clock" pattern="dd.MM.yyyy HH:mm:ss" mode="server" autoSync="true" syncInterval="11000" />
-                    </h:form>
-                </button>
-
+                <div class="btn-wrapper">
+                    <h:button class="main-btn" outcome="goToMain" value="FFFFFFF"/>
+                    <div class="clock-wrapper">
+                        <h:form id="form-clock" >
+                            <p:clock id="clock" pattern="dd.MM.yyyy HH:mm:ss" mode="server" autoSync="true" syncInterval="11000" />
+                        </h:form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -71,24 +61,4 @@
 
 </h:body>
 
-<h:form id="formm">
-    <p:button style="display: none" id="btnn" outcome="goToMain"/>
-    <p:button style="display: none" id="btnn2" outcome="goToIndex"/>
-</h:form>
-
-<h:outputScript>
-
-    document.getElementById("home-a").addEventListener("click", function (){
-        document.getElementById("formm:btnn2").click()
-    });
-
-    document.getElementById("logo-a").addEventListener("click", function (){
-        document.getElementById("formm:btnn2").click()
-    });
-
-    document.getElementById("main-btn").addEventListener("click", function (){
-        document.getElementById("formm:btnn").click()
-    });
-
-</h:outputScript>
 </html>
