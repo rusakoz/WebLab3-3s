@@ -38,7 +38,7 @@ public class AreaCheckBean implements Serializable {
         try {
             ResultsService.getInstance().saveResult(resultsEntity);
         } catch (Exception e) {
-            System.err.println("Ошибка сохранения данных");
+            System.err.println("Error saveResult DB");
         }
 
         List<Results> resultsList = resBean.getResults();

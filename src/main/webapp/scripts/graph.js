@@ -12,11 +12,6 @@ const widthAxisY = 3
 const heightAxisX = 3
 let radius = 0.1;
 
-// inputTextR.addEventListener("input", function (){
-//     console.log(inputTextR.value)
-//     draw(centerX, centerY, radiusInPixel * inputTextR.value, widthAxisY, heightAxisX)
-// })
-
 function validPixelXY(X, Y){
     return (!isNaN(X) && !isNaN(Y))
 }
@@ -62,7 +57,8 @@ function printPointFromTable(){
     const last_tr = all_tr[all_tr.length - 1]
     printPoint(parseFloat(last_tr.cells[0].textContent),
                 parseFloat(last_tr.cells[1].textContent),
-                    parseFloat(last_tr.cells[2].textContent))
+                    parseFloat(last_tr.cells[2].textContent),
+                    last_tr.cells[3].textContent.trim() === "Попал" ? "red" : "green")
 }
 
 function refreshGraph(){
@@ -160,10 +156,10 @@ function draw(centerX, centerY, radiusInPixel, widthAxisY, heightAxisX){
     ctx.fillText(radius.toString(), centerX + radiusInPixel, centerY - 4.5);
 }
 
-function printPoint(X, Y, R){
+function printPoint(X, Y, R, color){
     draw(centerX, centerY, radiusInPixel * R, widthAxisY, heightAxisX)
     let x = centerX - 2 + radiusInPixel * X
     let y = centerY - 2 + (-radiusInPixel * Y)
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = color
     ctx.fillRect(x, y, 4, 4)
 }

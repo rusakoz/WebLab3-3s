@@ -7,17 +7,17 @@ import java.util.List;
 
 public class ResultsService {
     private final CheckAreaDAOimpl checkAreaDAOimpl = CheckAreaDAOimpl.getInstance();
-    public static volatile ResultsService INSTANCE;
+    public static volatile ResultsService Instance;
     private ResultsService() {}
     public static ResultsService getInstance(){
-        if (INSTANCE == null){
+        if (Instance == null){
             synchronized (ResultsService.class){
-                if (INSTANCE == null){
-                    INSTANCE = new ResultsService();
+                if (Instance == null){
+                    Instance = new ResultsService();
                 }
             }
         }
-        return INSTANCE;
+        return Instance;
     }
     public List<Results> findAllResults() throws Exception {
         return checkAreaDAOimpl.findAll();
